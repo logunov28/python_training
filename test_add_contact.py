@@ -126,7 +126,6 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
-        #wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
     def open_add_new_page(self, wd):
         wd.find_element_by_link_text("add new").click()
