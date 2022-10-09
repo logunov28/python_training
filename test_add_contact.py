@@ -105,11 +105,11 @@ class TestAddContact(unittest.TestCase):
         # enter_anniversary_day
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.anniversary_day)
-        wd.find_element_by_xpath("//div[@id='content']/form/select[3]/option[12]").click()
+        wd.find_element_by_css_selector("select[name=\"aday\"] > option[value=\"" + contact.anniversary_day + "\"]").click()
         # enter_anniversary_month
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
-        wd.find_element_by_xpath("//div[@id='content']/form/select[4]/option[11]").click()
+        wd.find_element_by_css_selector("select[name=\"amonth\"] > option[value=\"" + contact.anniversary_month + "\"]").click()
         # enter_anniversary_year
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
