@@ -8,6 +8,7 @@ class Application:
     def __init__(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
+        self.wd.maximize_window()
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
@@ -18,3 +19,4 @@ class Application:
 
     def destroy(self):
         self.wd.quit()
+
