@@ -1,18 +1,12 @@
-from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-from fixture.session import SessionHelper
 
-class Application:
+class ContactHelper:
 
-    def __init__(self):
-        self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(30)
-        self.session = SessionHelper(self)
+    def __init__(self, app):
+        self.app = app
 
-    def add_contact(self, contact):
-        wd = self.wd
+    def add(self, contact):
+        wd = self.app.wd
         # enter_firstname
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -116,26 +110,5 @@ class Application:
         wd.find_element_by_name("notes").send_keys(contact.notes)
 
     def open_add_new_page(self):
-        wd = self.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
-
-    def open_home_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/")
-
-    def is_element_present(self, how, what):
-        try:
-            self.wd.find_element(by=how, value=what)
-        except NoSuchElementException as e:
-            return False
-        return True
-
-    def is_alert_present(self):
-        try:
-            self.wd.switch_to_alert()
-        except NoAlertPresentException as e:
-            return False
-        return True
-
-    def destroy(self):
-        self.wd.quit()
