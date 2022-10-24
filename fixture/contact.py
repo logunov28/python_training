@@ -1,5 +1,4 @@
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver import Keys
 
 class ContactHelper:
 
@@ -77,7 +76,6 @@ class ContactHelper:
         Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.birthday)
         wd.find_element_by_xpath("//option[@value='" + contact.birthday + "']").click()
         # enter_birthmonth
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.month_of_birth)
         wd.find_element_by_xpath("//option[@value='" + contact.month_of_birth + "']").click()
         # enter_year_of_birth
         wd.find_element_by_name("byear").click()
@@ -90,8 +88,7 @@ class ContactHelper:
             "select[name=\"aday\"] > option[value=\"" + contact.anniversary_day + "\"]").click()
         # enter_anniversary_month
         wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
-        wd.find_element_by_css_selector("[value=\"" + contact.anniversary_month + "\"]").click()
+        wd.find_element_by_xpath('//select[@name ="amonth"]/option[@value="'+ contact.anniversary_month +'"]').click()
         # enter_anniversary_year
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
