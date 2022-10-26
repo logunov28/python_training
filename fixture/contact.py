@@ -88,7 +88,7 @@ class ContactHelper:
             "select[name=\"aday\"] > option[value=\"" + contact.anniversary_day + "\"]").click()
         # enter_anniversary_month
         wd.find_element_by_name("amonth").click()
-        wd.find_element_by_xpath('//select[@name ="amonth"]/option[@value="'+ contact.anniversary_month +'"]').click()
+        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
         # enter_anniversary_year
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
