@@ -120,21 +120,25 @@ class ContactHelper:
         if not wd.current_url.endswith("/edit.php"):
             wd.find_element_by_link_text("add new").click()
 
-
-
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         # select first contact
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
         # submit deletion
         wd.find_element_by_css_selector('[value="Delete"]').click()
         wd.switch_to.alert.accept()
         self.contact_cache = None
 
-    def edit_first_contact(self, contact):
+    def edit_first_contact(self):
+        self.edit_contact_by_index(0)
+
+    def edit_contact_by_index(self, index, contact):
         wd = self.app.wd
         # go to edit page
-        wd.find_element_by_css_selector('[title="Edit"]').click()
+        wd.find_elements_by_css_selector('[title="Edit"]')[index].click()
         self.fill(contact)
         # confirm edition
         wd.find_element_by_name("update").click()

@@ -1,6 +1,7 @@
 from model.contact import Contact
+from random import randrange
 
-def test_delete_first_contact(app):
+def test_delete_some_contact(app):
     app.open_home_page()
     if app.contact.count() == 0:
         app.contact.add(Contact(firstname="Kurt", middlename="Donald", lastname="Kobain", nickname="idk", title="idk",
@@ -9,9 +10,10 @@ def test_delete_first_contact(app):
                             birthday="4", month_of_birth="March", year_of_birth="1967", anniversary_day="10", anniversary_month="October", anniversary_year="2022", address2="New York",
                             phone2="25", notes="still alive"))
     old_contacts = app.contact.get_contact_list()
-    app.contact.delete_first_contact()
+    index = randrange(len(old_contacts))
+    app.contact.delete_contact_by_index(index)
     app.open_home_page()
     new_contacts = app.contact.get_contact_list()
     assert len(old_contacts) - 1 == len(new_contacts)
-    old_contacts[0:1] = []
+    old_contacts[index:index+1] = []
     assert old_contacts == new_contacts
