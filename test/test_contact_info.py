@@ -1,22 +1,12 @@
 import re
 
 
-def test_names_on_home_page(app):
+def test_info_on_home_page(app):
     contact_from_home_page = app.contact.get_contact_list()[0]
     contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
     assert contact_from_home_page.firstname == contact_from_edit_page.firstname
     assert contact_from_home_page.lastname == contact_from_edit_page.lastname
-
-
-def test_emails_on_home_page(app):
-    contact_from_home_page = app.contact.get_contact_list()[0]
-    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
     assert contact_from_home_page.all_emails_from_home_page == merge_emails_like_on_home_page(contact_from_edit_page)
-
-
-def test_phones_on_home_page(app):
-    contact_from_home_page = app.contact.get_contact_list()[0]
-    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
     assert contact_from_home_page.all_phones_from_home_page == merge_phones_like_on_home_page(contact_from_edit_page)
 
 
