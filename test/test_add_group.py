@@ -1,20 +1,30 @@
 # -*- coding: utf-8 -*-
+import pytest, random, string
 from model.group import Group
 
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-def test_add_group(app):
-    app.open_home_page()
-    app.group.open_groups_page()
-    old_groups = app.group.get_group_list()
-    group = Group(name="First_group", header="This is the first group.",
-                           footer="I mean this group was created earlier than others.")
-    app.group.create(group)
-    app.group.return_to_groups_page()
-    assert len(old_groups) + 1 == app.group.count()
-    new_groups = app.group.get_group_list()
-    old_groups.append(group)
-    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
+test_data = [Group(name="", header="", footer="")] + [Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
+    for i in range(5)
+]
+
+@pytest.mark.parametrize("group", test_data, ids=[repr(x) for x in test_data])
+def test_add_group(app, group):
+    for group in test_data:
+        app.open_home_page()
+        app.group.open_groups_page()
+        old_groups = app.group.get_group_list()
+        app.group.create(group)
+        app.group.return_to_groups_page()
+        assert len(old_groups) + 1 == app.group.count()
+        new_groups = app.group.get_group_list()
+        old_groups.append(group)
+        assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+
+"""
 def test_add_empty_group(app):
     app.open_home_page()
     app.group.open_groups_page()
@@ -26,4 +36,5 @@ def test_add_empty_group(app):
     assert len(old_groups) + 1 == len(new_groups)
     old_groups.append(group)
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+    """
 
