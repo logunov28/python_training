@@ -2,6 +2,8 @@
 from model.group import Group
 
 
+
+
 def test_add_group(app, json_groups):
     group = json_groups
     app.open_home_page()
