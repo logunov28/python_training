@@ -42,7 +42,7 @@ def random_year():
 
 test_data = [Contact(firstname="", middlename="", lastname="", nickname="", title="", company="", address="",
                      home_phone="", mobile_phone="", work_phone="", fax="", email="", email2="", email3="", homepage="",
-                     birthday="", month_of_birth="", year_of_birth="", anniversary_day="", anniversary_month="-",
+                     birthday="0", month_of_birth="-", year_of_birth="", anniversary_day="0", anniversary_month="-",
                      anniversary_year="", address2="", phone2="", notes="")] + [Contact(firstname=random_string('firstname', 10), middlename=random_string('middlename', 10),
                      lastname=random_string('lastname', 10), nickname=random_string('nickname', 10), title=random_string('title', 10),
                      company=random_string('company', 10), address=random_string('address', 20), home_phone=random_string('home_phone', 12),

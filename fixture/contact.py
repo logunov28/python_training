@@ -76,8 +76,7 @@ class ContactHelper:
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
         # enter_birthday
         wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.birthday)
-        wd.find_element_by_xpath("//option[@value='" + contact.birthday + "']").click()
+        wd.find_element_by_xpath(f'//*[@name ="bday"]/option[@value="{contact.birthday}"]').click()
         # enter_birthmonth
         wd.find_element_by_xpath("//option[@value='" + contact.month_of_birth + "']").click()
         # enter_year_of_birth
@@ -86,9 +85,7 @@ class ContactHelper:
         wd.find_element_by_name("byear").send_keys(contact.year_of_birth)
         # enter_anniversary_day
         wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.anniversary_day)
-        wd.find_element_by_css_selector(
-            "select[name=\"aday\"] > option[value=\"" + contact.anniversary_day + "\"]").click()
+        wd.find_element_by_xpath(f'//*[@name ="aday"]/option[@value="{contact.anniversary_day}"]').click()
         # enter_anniversary_month
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
