@@ -1,5 +1,6 @@
 from model.contact import Contact
 from random import *
+import random
 
 def test_edit_contact(app, db, json_contacts, check_ui):
     old_contacts = db.get_contact_list()

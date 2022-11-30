@@ -1,5 +1,6 @@
 from model.group import Group
 from random import *
+import random
 
 def test_modify_group_name(app, db, json_groups, check_ui):
     app.open_home_page()
