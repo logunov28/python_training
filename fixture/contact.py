@@ -154,7 +154,7 @@ class ContactHelper:
     def modify_contact_by_id(self, id, contact):
         wd = self.app.wd
         # go to edit page
-        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+        wd.find_elements_by_css_selector('[href$="id=%s"]' % id)[1].click()
         self.fill(contact)
         # confirm edition
         wd.find_element_by_name("update").click()

@@ -13,6 +13,10 @@ def test_modify_group_name(app, db, json_groups, check_ui):
     app.group.modify_group_by_id(random_group.id, json_groups)
     app.group.return_to_groups_page()
     new_groups = db.get_group_list()
+    for i in range(len(old_groups)):
+        if old_groups[i].id == random_group.id:
+            old_groups[i] = group
+            old_groups[i].id = random_group.id
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
         assert clear(sorted(new_groups, key=Group.id_or_max)) == sorted(app.group.get_group_list(), key=Group.id_or_max)
