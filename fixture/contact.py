@@ -226,8 +226,38 @@ class ContactHelper:
         return Contact(home_phone=home_phone, work_phone=work_phone,
                        mobile_phone=mobile_phone, phone2=phone2)
 
+    def add_contact_to_group_by_id(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_css_selector('[type="checkbox"][id="%s"]' % contact_id).click()
+        wd.find_element_by_name("to_group").click()
+        name = "to_group"
+        self.change_group_value(group_id, name)
+        wd.find_element_by_css_selector('[value="Add to"]').click()
+
+    def change_group_value(self, id, name):
+        wd = self.app.wd
+        if id is not None:
+            wd.find_element_by_css_selector(f'[name="{name}"]>[value="{id}"]').click()
+
+    def delete_contact_from_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_contact_page()
+        wd.find_elements_by_css_selector('[name="group"]')[0].click()
+        name = "group"
+        self.change_group_value(group_id, name)
+        wd.find_element_by_name("remove")
+        self.choose_contact(contact_id)
+        wd.find_element_by_css_selector('[name="remove"]').click()
 
 
+    def choose_contact(self, contact_id):
+        wd = self.app.wd
+        self.open_contact_page()
+        # select first contact
+        wd.find_element_by_css_selector(f'[type="checkbox"][value="{contact_id}"]').click()
 
-
-
+    def open_contact_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0):
+            wd.find_element_by_link_text("home").click()
