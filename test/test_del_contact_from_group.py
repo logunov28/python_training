@@ -7,6 +7,7 @@ import random
 def test_del_contact_from_group(app, orm):
     groups = orm.get_group_list()
     if len(groups) == 0:
+        app.group.return_to_groups_page()
         app.group.create(Group(name="test"))
         groups = orm.get_group_list()
     random_group = random.choice(groups)
