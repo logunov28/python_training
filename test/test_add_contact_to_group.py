@@ -6,6 +6,7 @@ import random
 def test_add_contact_to_group(app, json_contacts, orm):
     groups = orm.get_group_list()
     if len(groups) == 0:
+        app.group.return_to_groups_page()
         app.group.create(Group(name="new_group"))
         groups = orm.get_group_list()
     random_group = random.choice(groups)
