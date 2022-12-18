@@ -12,9 +12,8 @@ def test_add_contact_to_group(app, json_contacts, orm):
     random_group = random.choice(groups)
     contacts = orm.get_contacts_not_in_group(random_group)
     if len(contacts) == 0:
-        app.contact.add()
-        app.contact.fill_contact_form(json_contacts)
-        app.contact.aply_create()
+        app.contact.open_add_new_page()
+        app.contact.add(json_contacts)
         contacts = orm.get_contacts_not_in_group(random_group)
     random_contact = random.choice(contacts)
     old_contacts = orm.get_contacts_in_group(random_group)
